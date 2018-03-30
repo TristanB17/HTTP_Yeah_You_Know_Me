@@ -4,15 +4,15 @@ class Server
 
   def commence
     tcp_server = TCPServer.new(9292)
+    count = 0
       while true
       client = tcp_server.accept
-
+      count += 1
       request_lines = []
       while line = client.gets and !line.chomp.empty?
         request_lines << line.chomp
       end
-
-      output = "Hello World!!!"
+      output = "Hello World! (#{count})"
       headers = ["http/1.1 200 ok",
                 "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
                 "server: ruby",
