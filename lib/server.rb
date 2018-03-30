@@ -10,11 +10,11 @@ require 'socket'
     end
 
     puts "Got this request:"
-    puts request_lines.inspect
+    puts request_lines
 
     puts "Sending response."
-    response = "<pre>" + request_lines.join("\n") + "</pre>"
-    output = "<html><head></head><body>#{response}</body></html>"
+    response = request_lines.join("\n")
+    output = "#{response}"
     headers = ["http/1.1 200 ok",
               "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
               "server: ruby",
