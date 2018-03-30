@@ -1,5 +1,8 @@
 require 'socket'
 
+class Server
+
+  def commence
     tcp_server = TCPServer.new(9292)
     client = tcp_server.accept
 
@@ -26,3 +29,6 @@ require 'socket'
     puts ["Wrote this response:", headers, output].join("\n")
     client.close
     puts "\nResponse complete, exiting."
+
+  end
+end
