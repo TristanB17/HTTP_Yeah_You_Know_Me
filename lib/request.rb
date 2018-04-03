@@ -1,6 +1,6 @@
-
+require 'pry'
 class Request
-  attr_reader     :request_lines
+  attr_reader :request_lines
 
   def initialize(request_lines)
     @request_lines = request_lines
