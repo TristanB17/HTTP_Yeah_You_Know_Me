@@ -1,4 +1,5 @@
 require 'socket'
+require 'pry'
 
 class Server
 
@@ -12,7 +13,7 @@ class Server
       while line = client.gets and !line.chomp.empty?
         request_lines << line.chomp
       end
-      request = Request.new(request_lines)
+      # request = Request.new(request_lines)
       output = "Hello World! (#{count})"
       headers = ["http/1.1 200 ok",
                 "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
