@@ -5,14 +5,7 @@ require 'pry'
 
 class ParserTest < Minitest::Test
 
-  def test_it_exists
-    parser = Parser.new
-
-    assert_instance_of Parser, parser
-  end
-
   def setup
-    @parser = Parser.new
     @request_lines = ["GET / HTTP/1.1",
                     "Host: localhost:9292",
                     "Connection: keep-alive",
@@ -25,43 +18,49 @@ class ParserTest < Minitest::Test
                     "Accept: */*",
                     "Accept-Encoding: gzip, deflate, br",
                     "Accept-Language: en-US,en;q=0.9"]
+    @parser = Parser.new(@request_lines)
+  end
+
+  def test_it_exists
+
+    assert_instance_of Parser, @parser
   end
 
   def test_get_verb
     @parser
     @request_lines
 
-    parser.get_verb
-    assert_equal "GET", parser.verb
+    @parser.get_verb
+    assert_equal "GET", @parser.verb
   end
 
   def test_get_path
     @parser
     @request_lines
 
-    parser.get_path
-    assert_equal "/", parser.path
+    @parser.get_path
+    assert_equal "/", @parser.path
   end
 
   def test_get_protocol
     @parser
     @request_lines
 
-    parser.get_protocol
-    assert_equal "HTTP/1.1", parser.protocol
+    @parser.get_protocol
+    assert_equal "HTTP/1.1", @parser.protocol
   end
 
   def test_get_host
     @parser
     @request_lines
 
-    parser.get_host
-    assert_equal "localhost", parser.host
+    @parser.get_host
+    assert_equal " localhost", @parser.host
   end
 
 
 
-
+end
 
 
 
@@ -90,10 +89,3 @@ class ParserTest < Minitest::Test
   #                 "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
   #               ], parser.parse_diagnostics(request_lines)
   # end
-
-
-
-
-
-
-end

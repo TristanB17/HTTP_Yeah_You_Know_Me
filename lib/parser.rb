@@ -3,6 +3,11 @@ require_relative 'server'
 require 'pry'
 
 class Parser
+  attr_reader :request_lines,
+              :verb,
+              :path,
+              :protocol,
+              :host
 
   def initialize(request_lines)
     @request_lines = request_lines
@@ -12,6 +17,14 @@ class Parser
     @protocol = get_protocol
     @host = get_host
   end
+
+  # module Diagnostics
+  #   @response_lines_hash = {}
+  #   @verb = get_verb
+  #   @path = get_path
+  #   @protocol = get_protocol
+  #   @host = get_host
+  # end
 
   # def parse_diagnostics(request_lines)
   #   verb = request_lines[0].split(" ")[0]
