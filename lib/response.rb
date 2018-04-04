@@ -1,5 +1,6 @@
 require 'pry'
 
+
 class Response
   attr_reader :request_lines,
               :verb,
@@ -7,7 +8,7 @@ class Response
 
 
     def initialize
-      @response = Parser.new
+      @response = Parser.new(request_lines)
     end
 
   # def initialize(request_lines)
@@ -21,31 +22,31 @@ class Response
   #   @accept = @request_lines[6]
   # end
 
-  def first_line
-    @request_lines[0].split(" ")
-  end
-
-  def get_host
-    @request_lines[1].split(": ")
-  end
-
-  def get_port
-    @host.split(":")
-  end
-
-  def get_accept
-    @request_lines[4].split(": ")
-  end
-
-  def print_diagnostics
-    print "Verb: #{@verb}\n"
-    print "Path: #{@path}\n"
-    print "Protocol: #{@protocol}\n"
-    print "Host: #{@host}\n"
-    print "Port: #{@port}\n"
-    print "Origin: #{@origin}\n"
-    print "#{@accept}\n"
-  end
+  # def first_line
+  #   @request_lines[0].split(" ")
+  # end
+  #
+  # def get_host
+  #   @request_lines[1].split(": ")
+  # end
+  #
+  # def get_port
+  #   @host.split(":")
+  # end
+  #
+  # def get_accept
+  #   @request_lines[4].split(": ")
+  # end
+  #
+  # def print_diagnostics
+  #   print "Verb: #{@verb}\n"
+  #   print "Path: #{@path}\n"
+  #   print "Protocol: #{@protocol}\n"
+  #   print "Host: #{@host}\n"
+  #   print "Port: #{@port}\n"
+  #   print "Origin: #{@origin}\n"
+  #   print "#{@accept}\n"
+  # end
 
 
 end
