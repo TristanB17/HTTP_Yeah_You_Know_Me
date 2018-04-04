@@ -26,7 +26,7 @@ class Server
           "server: ruby",
           "content-type: text/html; charset=iso-8859-1",
           "content-length: #{output.length}\r\n\r\n"].join("\r\n")
-      response = Parser.new(@request_lines)
+      request = Parser.new(@request_lines)
       binding.pry
       connection.puts headers
       connection.puts output

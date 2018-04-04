@@ -7,7 +7,9 @@ class Parser
               :verb,
               :path,
               :protocol,
-              :host
+              :host,
+              :port,
+              :accept
 
   def initialize(request_lines)
     @request_lines = request_lines
@@ -16,6 +18,9 @@ class Parser
     @path = get_path
     @protocol = get_protocol
     @host = get_host
+    @port = get_port
+    @origin = @host
+    @accept = get_accept
   end
 
   # module Diagnostics
@@ -50,8 +55,20 @@ class Parser
   end
 
   def get_host
-    @request_lines[1].split(":")[1]
+    @request_lines[1].split(":")[1].strip
   end
+
+  def get_port
+    @request_lines[1].split(":")[2]
+  end
+
+  def get_accept
+    @request_lines.select do |line|
+      return line if line.start_with?("Accept")
+    end
+  end
+
+  # def put_remaining_info_into_hash
 
 
 end

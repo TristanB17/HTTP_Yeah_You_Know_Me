@@ -55,9 +55,33 @@ class ParserTest < Minitest::Test
     @request_lines
 
     @parser.get_host
-    assert_equal " localhost", @parser.host
+    assert_equal "localhost", @parser.host
   end
 
+  def test_get_port
+    @parser
+    @request_lines
+
+    @parser.get_port
+    assert_equal "9292", @parser.port
+  end
+
+  def test_get_accept
+    @parser
+    @request_lines
+
+    @parser.get_accept
+    assert_equal "Accept: */*", @parser.accept
+  end
+
+
+  # def test_put_remaining_info_into_hash
+  #   @parser
+  #   @request_lines
+  #
+  #   @parser.put_remaining_info_into_hash
+  #   assert_equal({})
+  # end
 
 
 end
