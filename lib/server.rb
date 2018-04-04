@@ -14,7 +14,7 @@ class Server
         request_lines << line.chomp
       end
       request = Request.new(request_lines)
-      if request.path == '/hello'
+      if request.verb == "GET"
         output = "Hello World! (#{count})"
       end
       headers = ["http/1.1 200 ok",

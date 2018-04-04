@@ -1,7 +1,9 @@
 require 'pry'
 
 class Request
-  attr_reader :request_lines
+  attr_reader :request_lines,
+              :verb,
+              :path
 
   def initialize(request_lines)
     @request_lines = request_lines
@@ -9,7 +11,7 @@ class Request
     @path = first_line[1]
     @protocol = first_line[2]
     @host = get_host[1].delete(":9292")
-    @port = get_port[1]
+    @port = @request_lines[1].delete("Host: localhost:")
     @origin = get_host[1].delete(":9292")
     @accept = @request_lines[6]
     print "Verb: #{@verb}\n"
