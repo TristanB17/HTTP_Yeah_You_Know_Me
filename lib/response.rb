@@ -1,20 +1,25 @@
 require 'pry'
 
-class Request
+class Response
   attr_reader :request_lines,
               :verb,
               :path
 
-  def initialize(request_lines)
-    @request_lines = request_lines
-    @verb = first_line[0]
-    @path = first_line[1]
-    @protocol = first_line[2]
-    @host = get_host[1].delete(":9292")
-    @port = @request_lines[1].delete("Host: localhost:")
-    @origin = get_host[1].delete(":9292")
-    @accept = @request_lines[6]
-  end
+
+    def initialize
+      @response = Parser.new
+    end
+
+  # def initialize(request_lines)
+  #   @request_lines = request_lines
+  #   @verb = first_line[0]
+  #   @path = first_line[1]
+  #   @protocol = first_line[2]
+  #   @host = get_host[1].delete(":9292")
+  #   @port = @request_lines[1].delete("Host: localhost:")
+  #   @origin = get_host[1].delete(":9292")
+  #   @accept = @request_lines[6]
+  # end
 
   def first_line
     @request_lines[0].split(" ")

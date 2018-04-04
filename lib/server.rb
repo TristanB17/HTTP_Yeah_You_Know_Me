@@ -1,5 +1,5 @@
 require 'socket'
-require_relative 'request'
+require_relative 'response'
 
 class Server
 
@@ -13,7 +13,7 @@ class Server
       while line = client.gets and !line.chomp.empty?
         request_lines << line.chomp
       end
-      request = Request.new(request_lines)
+      request = Response.new(request_lines)
       if request.verb == "GET"
         output = "Hello World! (#{count})"
       end
