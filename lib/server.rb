@@ -10,6 +10,7 @@ class Server
       client = tcp_server.accept
       count += 1
       request_lines = []
+      end
       while line = client.gets and !line.chomp.empty?
         request_lines << line.chomp
       end
@@ -27,8 +28,6 @@ class Server
           client.puts output
 
       puts [headers, request.print_diagnostics, output].join("\n")
-    end
-
       client.close
   end
 end
