@@ -11,31 +11,64 @@ class ParserTest < Minitest::Test
     assert_instance_of Parser, parser
   end
 
-  def test_setup
+  def setup
     @parser = Parser.new
     @request_lines = ["GET / HTTP/1.1",
                     "Host: localhost:9292",
                     "Connection: keep-alive",
                     "Cache-Control: no-cache",
-                    "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36",
+                    "User-Agent: Mozilla/5.0
+                     (Macintosh; Intel Mac OS X 10_13_3)
+                     AppleWebKit/537.36 (KHTML, like Gecko)
+                     Chrome/65.0.3325.181 Safari/537.36",
                     "Postman-Token: 2c60fe10-2ff4-5244-291b-c6424a8b7bff",
                     "Accept: */*",
                     "Accept-Encoding: gzip, deflate, br",
                     "Accept-Language: en-US,en;q=0.9"]
   end
 
+  def test_get_verb
+    @parser
+    @request_lines
 
+    parser.get_verb
+    assert_equal "GET", parser.verb
+  end
 
-  def test_get_verb 
-    assert_equal "Verb: GET\n Path: /\n Protocol: HTTP/1.1\nHost:
-    localhost\nPort: 9292\nOrigin: localhost\n
-    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\n",
-    parser.parse_diagnostics(request_lines)
+  def test_get_path
+    @parser
+    @request_lines
+
+    parser.get_path
+    assert_equal "/", parser.path
+  end
+
+  def test_get_protocol
+    @parser
+    @request_lines
+
+    parser.get_protocol
+    assert_equal "HTTP/1.1", parser.protocol
+  end
+
+  def test_get_host
+    @parser
+    @request_lines
+
+    parser.get_host
+    assert_equal "localhost", parser.host
   end
 
 
 
 
+
+
+
+  # assert_equal "Verb: GET\n Path: /\n Protocol: HTTP/1.1\nHost:
+  # localhost\nPort: 9292\nOrigin: localhost\n
+  # Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\n",
+  # parser.parse_diagnostics(request_lines)
   # def test_output_normal
   #   parser = Parser.new
   #   request_lines = "GET / HTTP/1.1
