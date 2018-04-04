@@ -4,6 +4,10 @@ require 'pry'
 
 class Parser
 
+  def initialize(request_lines)
+    @request_lines = request_lines
+  end
+
   def parse_diagnostics(request_lines)
     verb = request_lines[0].split(" ")[0]
     path = request_lines[0].split(" ")[1]
@@ -15,6 +19,6 @@ class Parser
     "\nVerb: #{verb}\nPath: #{path}\nProtocol: #{protocol}\nHost:#{host}\nPort: #{port}\nOrigin:#{origin}\nAccepts: #{accept}\n"
   end
 
-
+  
 
 end
