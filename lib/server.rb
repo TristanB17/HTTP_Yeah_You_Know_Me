@@ -17,15 +17,16 @@ class Server
       if request.verb == "GET"
         output = "Hello World! (#{count})"
       end
-      headers = ["http/1.1 200 ok",
-                "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
-                "server: ruby",
-                "content-type: text/html; charset=iso-8859-1",
-                "content-length: #{output.length}\r\n\r\n"].join("\r\n")
-      client.puts headers
-      client.puts output
+        headers = ["http/1.1 200 ok",
+          "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
+          "server: ruby",
+          "content-type: text/html; charset=iso-8859-1",
+          "content-length: #{output.length}\r\n\r\n"].join("\r\n")
+          client.puts headers
+          client.puts request.print_diagnostics
+          client.puts output
 
-      puts [headers, output].join("\n")
+      puts [headers, request.print_diagnostics, output].join("\n")
     end
 
       client.close

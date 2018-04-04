@@ -14,13 +14,6 @@ class Request
     @port = @request_lines[1].delete("Host: localhost:")
     @origin = get_host[1].delete(":9292")
     @accept = @request_lines[6]
-    print "Verb: #{@verb}\n"
-    print "Path: #{@path}\n"
-    print "Protocol: #{@protocol}\n"
-    print "Host: #{@host}\n"
-    print "Port: #{@port}\n"
-    print "Origin: #{@origin}\n"
-    print "#{@accept}\n"
   end
 
   def first_line
@@ -37,6 +30,16 @@ class Request
 
   def get_accept
     @request_lines[4].split(": ")
+  end
+
+  def print_diagnostics
+    print "Verb: #{@verb}\n"
+    print "Path: #{@path}\n"
+    print "Protocol: #{@protocol}\n"
+    print "Host: #{@host}\n"
+    print "Port: #{@port}\n"
+    print "Origin: #{@origin}\n"
+    print "#{@accept}\n"
   end
 
 
