@@ -9,7 +9,8 @@ class Parser
               :protocol,
               :host,
               :port,
-              :accept
+              :accept,
+              :homepage
 
   def initialize(request_lines)
     @request_lines = request_lines
@@ -20,15 +21,16 @@ class Parser
     @port = get_port
     @origin = @host
     @accept = get_accept
+    @homepage = make_homepage
   end
 
   def get_verb
     @request_lines[0].split(" ")[0]
   end
 
-   def get_path
-     @request_lines[0].split(" ")[1]
-   end
+  def get_path
+    @request_lines[0].split(" ")[1]
+  end
 
   def get_protocol
     @request_lines[0].split(" ")[2]
@@ -48,14 +50,14 @@ class Parser
     end
   end
 
-  def homepage
-    puts "Verb:#{@verb}"
-    puts "Path: #{@path}"
-    puts "Protocol: #{@protocol}"
-    puts "Host:#{@host}"
-    puts "Port: #{@port}"
-    puts "Origin:#{@origin}"
-    puts "#{@accept}"
+  def make_homepage
+    "\nVerb:#{@verb}\n
+    Path: #{@path}\n
+    Protocol: #{@protocol}\n
+    Host:#{@host}\n
+    Port: #{@port}\n
+    Origin:#{@origin}\n
+    #{@accept}\n"
   end
 
 end

@@ -2,7 +2,6 @@ require 'socket'
 require_relative 'response'
 require_relative 'parser'
 require 'pry'
-# require 'printer'
 
 class Server
 
@@ -24,9 +23,8 @@ class Server
       path = @request_lines[0].split[1]
       request = Parser.new(@request_lines)
       if path == "/hello"
-        output = "<html>Hello World! (#{@count})#{request.verb}</html>"
+        output = "<html>Hello World! (#{@count})#{request.homepage}</html>"
       end
-      output
       headers = ["http/1.1 200 ok"]
           # "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
           # "server: ruby",
