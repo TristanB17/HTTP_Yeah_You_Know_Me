@@ -1,6 +1,7 @@
 
 require_relative 'parser'
 require 'socket'
+require 'pry'
 
 class Server
 
@@ -8,14 +9,27 @@ class Server
     @request_lines = []
     tcp_server = TCPServer.new(9292)
     count = 0
+    requests = 0
       while true
       client = tcp_server.accept
-      count += 1
       while line = client.gets and !line.chomp.empty?
         @request_lines << line.chomp
+        requests += 1
       end
       request = Parser.new(@request_lines)
-      output = "<html>Hello World! (#{count})#{request.homepage}</html>"
+      path = @request_lines[0].split(":")[1]
+      if path == "/hello"
+        output = "<html>Hello World! (#{count})#{request.homepage}</html>"
+        count += 1
+      elsif path == "/"
+        output = "<html>#{request.homepage}</html>"
+      elsif path == "/datetime"
+        output = "<html>#{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}#{request.homepage}</html>"
+      elsif path == "/shutdown"
+        output = "<html>Number of Requests: #{requests}#{request.homepage}</html>"
+        puts [output].join("\n")
+        client.close
+      end
       headers = ["http/1.1 200 ok",
                 "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
                 "server: ruby",

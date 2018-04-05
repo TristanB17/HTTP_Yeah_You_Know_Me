@@ -51,7 +51,7 @@ class Parser
   end
 
   def make_homepage
-    "\nVerb:#{@verb}\nPath: #{@path}\nProtocol: #{@protocol}\nHost:#{@host}\nPort: #{@port}\nOrigin:#{@origin}\n#{@accept}\n"
+    "<pre>\nVerb:#{@verb}\nPath: #{@path}\nProtocol: #{@protocol}\nHost:#{@host}\nPort: #{@port}\nOrigin:#{@origin}\n#{@accept}\n</pre>"
   end
 
 end
