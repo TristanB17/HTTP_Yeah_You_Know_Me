@@ -21,19 +21,21 @@ class Server
       #(HTTP verb, path, protocol, etc) and chomps new line
       #takes request_lines
       @request_lines = receive_request(connection)
-      output = "Hello World! (#{@count})"
-      headers = ["http/1.1 200 ok",
-          "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
-          "server: ruby",
-          "content-type: text/html; charset=iso-8859-1",
-          "content-length: #{output.length}\r\n\r\n"].join("\r\n")
+      path = @request_lines[0].split[1]
       request = Parser.new(@request_lines)
-      if request.path == "/"
-
-
+      if path == "/hello"
+        output = "<html>Hello World! (#{@count})#{request.verb}</html>"
+      end
+      output
+      headers = ["http/1.1 200 ok"]
+          # "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
+          # "server: ruby",
+          # "content-type: text/html; charset=iso-8859-1",
+          # "content-length: #{output.length}\r\n\r\n"].join("\r\n")
       connection.puts headers
+      connection.puts request.homepage
       connection.puts output
-      puts [headers, output].join("\n")
+      puts [headers, request.homepage, output].join("\n")
       connection.close
     end
   end
