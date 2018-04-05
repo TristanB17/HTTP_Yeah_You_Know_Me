@@ -2,6 +2,7 @@ require 'socket'
 require_relative 'response'
 require_relative 'parser'
 require 'pry'
+# require 'printer'
 
 class Server
 
@@ -27,7 +28,9 @@ class Server
           "content-type: text/html; charset=iso-8859-1",
           "content-length: #{output.length}\r\n\r\n"].join("\r\n")
       request = Parser.new(@request_lines)
-      binding.pry
+      if request.path == "/"
+
+
       connection.puts headers
       connection.puts output
       puts [headers, output].join("\n")

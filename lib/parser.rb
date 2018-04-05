@@ -12,9 +12,8 @@ class Parser
               :accept
 
   def initialize(request_lines)
-    @request_lines = request_lines
-    @response_lines_hash = {}
-    @verb = get_verb
+    # @request_lines = request_lines
+    @verb = request_lines[0].split(" ")[0]
     @path = get_path
     @protocol = get_protocol
     @host = get_host
@@ -68,7 +67,8 @@ class Parser
     end
   end
 
-  # def put_remaining_info_into_hash
+  def homepage
+    "<pre>\nVerb:#{@verb}"
 
 
 end

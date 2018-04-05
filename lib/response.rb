@@ -17,9 +17,9 @@ class Response
   #   @verb = first_line[0]
   #   @path = first_line[1]
   #   @protocol = first_line[2]
-  #   @host = get_host[1].delete(":9292")
-  #   @port = @request_lines[1].delete("Host: localhost:")
-  #   @origin = get_host[1].delete(":9292")
+  #   @host = get_host[1]
+  #   @port = @request_lines[1]
+  #   @origin = get_host[1]
   #   @accept = @request_lines[6]
   # end
 
